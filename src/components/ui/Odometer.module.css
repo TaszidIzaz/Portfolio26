@@ -1,0 +1,4 @@
+.odo { display: inline-flex; overflow: hidden; height: 1em; line-height: 1; }
+.col { display: inline-block; height: 1em; overflow: hidden; text-align: center; }
+.strip { display: flex; flex-direction: column; }
+.strip span { height: 1em; line-height: 1; display: block; }

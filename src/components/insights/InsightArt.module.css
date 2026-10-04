@@ -1,0 +1,17 @@
+/* Insight cover art. Palette per mode: neon (default + Brutalist), greys (Swiss), earth (Almanac). */
+.art {
+  --art-bg: #0B0B10; --art-c1: #F08BBE; --art-c2: #9BEA6B; --art-c3: #2F4FE0; --art-line: #9BEA6B; --art-ink: #ECECEC;
+  position: relative; overflow: hidden; background: var(--art-bg); border-radius: var(--radius);
+}
+.art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.bg { fill: var(--art-bg); }
+.stars { fill: var(--art-c3); }
+.solid { fill: var(--art-c3); }
+.subject { color: var(--art-c1); }
+.fold { fill: none; stroke: var(--art-bg); stroke-width: 1.6; stroke-linecap: round; opacity: .55; }
+.outline { fill: none; stroke: var(--art-line); stroke-width: 2.5; }
+.patInk { fill: none; stroke: var(--art-ink); stroke-width: 2; }
+.patBlue { fill: none; stroke: var(--art-c3); stroke-width: 2.2; }
+
+:global(html[data-theme="swiss"]) .art { --art-bg: #0E0E0E; --art-c1: #EDEDED; --art-c2: #8C8C8C; --art-c3: #4A4A4A; --art-line: #EDEDED; --art-ink: #CFCFCF; }
+:global(html[data-theme="folk"]) .art { --art-bg: #262D20; --art-c1: #E3CB72; --art-c2: #C98A5E; --art-c3: #7C8A3E; --art-line: #E7E0D0; --art-ink: #E7E0D0; }

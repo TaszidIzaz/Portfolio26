@@ -1,0 +1,46 @@
+.loader {
+  position: fixed; inset: 0; z-index: 100;
+  pointer-events: none;
+  background: var(--fg);
+  color: var(--bg);
+  will-change: transform, opacity;
+}
+
+/* Corner UI: name, status message, counter */
+.ui { position: absolute; inset: 0; z-index: 3; padding-block: var(--margin); align-content: space-between; }
+.ui > * { opacity: 0; }
+.msg { text-align: right; }
+.count { font-size: var(--fs-l); font-weight: 500; line-height: var(--lh-l); align-self: end; font-variant-numeric: tabular-nums; letter-spacing: var(--ls-head); }
+.status { text-align: right; align-self: end; }
+
+/* Centre: title and snapshots share one grid cell, snapshots on top */
+.center { position: absolute; inset: 0; display: grid; place-items: center; }
+.title {
+  grid-area: 1 / 1;
+  text-align: center;
+  font-size: var(--fs-l);
+  font-weight: 500;
+  line-height: .92;
+  letter-spacing: var(--ls);
+  white-space: nowrap; /* always exactly two lines */
+}
+.line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+.line > span { display: block; visibility: hidden; } /* JS reveals it; nothing flashes before */
+
+.stage {
+  --snap-h: clamp(190px, 34vh, 380px);
+  grid-area: 1 / 1;
+  position: relative; z-index: 2;
+  display: grid; place-items: center;
+  height: var(--snap-h);
+  clip-path: inset(100% 0% 0% 0%);
+}
+/* Same height for every snapshot, width follows the image */
+.slide { grid-area: 1 / 1; height: var(--snap-h); width: auto; max-width: 86vw; object-fit: cover; opacity: 0; }
+.slide[data-active] { opacity: 1; }
+
+@media (max-width: 767px) {
+  .title { white-space: normal; max-width: 9ch; margin-inline: auto; }
+  .stage { --snap-h: 26vh; }
+}
+@media (prefers-reduced-motion: reduce) { .loader { display: none; } }

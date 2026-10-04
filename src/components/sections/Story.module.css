@@ -1,0 +1,98 @@
+/* Sideways story (pinned; the track moves horizontally) */
+.story { position: relative; height: 100svh; overflow: hidden; }
+.track { display: flex; height: 100%; width: max-content; will-change: transform; }
+.panel { position: relative; flex: none; height: 100%; }
+
+/* Intro */
+.intro {
+  width: min(72vw, 1040px);
+  padding: calc(var(--margin) + 110px) var(--margin) calc(var(--dock-h) + 90px);
+  display: flex; flex-direction: column; justify-content: center; gap: 22px;
+}
+.title { font-size: var(--fs-l); line-height: var(--lh-l); letter-spacing: var(--ls-head); }
+.lede { max-width: 20em; }
+.hint { display: inline-flex; gap: 10px; align-items: center; margin-top: 12px; }
+.arrow { display: inline-block; animation: nudge 1.6s var(--ease) infinite; }
+@keyframes nudge { 50% { transform: translateX(8px); } }
+
+/* A step: big spaced word, copy and a visual at alternating heights */
+.step { width: 80vw; }
+.word {
+  position: absolute; left: 4%; top: 8%;
+  font-size: var(--fs-l); line-height: 1; font-weight: 500;
+  letter-spacing: .42em; text-transform: uppercase; white-space: nowrap;
+  color: var(--faint); pointer-events: none;
+}
+.copy { position: absolute; left: 4%; top: 22%; width: min(27vw, 400px); display: flex; flex-direction: column; gap: 14px; }
+.visual { position: absolute; left: 40%; top: 24%; width: min(32vw, 520px); }
+.alt .word { top: auto; bottom: 14%; }
+.alt .copy { top: 18%; }
+.alt .visual { top: 18%; }
+
+.meta { display: flex; gap: 14px; text-transform: uppercase; }
+.stepTitle { max-width: 14em; }
+.text { color: var(--muted); max-width: 26em; line-height: 1.55; }
+.quote { padding-left: 14px; border-left: 2px solid var(--fg); font-weight: 500; line-height: 1.45; max-width: 26em; }
+.ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 6px; }
+
+/* Per-mode stickers sit on the visual's top-right corner */
+.stickers { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+
+/* Illustration tile (StoryTile) */
+.photo { position: relative; }
+
+/* Pile of drafts (Tuesday fan, Wednesday bin) */
+.pile { position: relative; width: min(22vw, 360px); aspect-ratio: 4 / 3; margin: 14% auto 0; }
+.card {
+  position: absolute; inset: 0; overflow: hidden;
+  background: var(--soft); border-radius: var(--radius);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .45);
+  will-change: transform;
+}
+.nope {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: -12deg; z-index: 2;
+  padding: 2px 14px; background: var(--fg); color: var(--bg); font-weight: 500; opacity: 0;
+}
+.binWrap { position: relative; }
+.count { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; gap: 4px; font-variant-numeric: tabular-nums; }
+
+/* Thursday's build log (after Catalyst's activity feed) */
+.log {
+  position: absolute; right: -9vw; bottom: -10%; width: min(24vw, 360px);
+  display: flex; flex-direction: column;
+  padding: 14px 16px; background: var(--fg); color: var(--bg); border-radius: var(--radius);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .5);
+}
+.log li { display: grid; grid-template-columns: 3.4em 1fr auto; gap: 10px; padding-block: 6px; border-top: 1px solid color-mix(in srgb, var(--bg) 14%, transparent); }
+.log .logHead { display: flex; justify-content: space-between; border-top: 0; padding-top: 0; color: color-mix(in srgb, var(--bg) 60%, transparent); }
+.logTime, .logWho { color: color-mix(in srgb, var(--bg) 55%, transparent); font-variant-numeric: tabular-nums; }
+
+/* Progress: step counter · days of the week · bar */
+.hud { position: absolute; left: 0; right: 0; bottom: calc(var(--dock-h) + 30px); align-items: center; pointer-events: none; }
+.status { grid-column: 1 / 4; font-variant-numeric: tabular-nums; }
+.days { grid-column: 4 / 10; display: flex; gap: 14px; list-style: none; color: var(--faint); }
+.days li { transition: color .4s; }
+.days li[data-on] { color: var(--fg); }
+.progress { grid-column: 10 / 13; height: 1px; background: var(--line); overflow: hidden; }
+.progress span { display: block; height: 100%; background: var(--fg); transform: scaleX(0); transform-origin: left; }
+
+@media (max-width: 767px) {
+  .intro { width: 100vw; }
+  .step { width: 100vw; }
+  .word { top: 9%; letter-spacing: .3em; }
+  .copy, .alt .copy { left: var(--margin); right: var(--margin); top: 15%; width: auto; gap: 10px; }
+  .photo :global([data-tone]) { aspect-ratio: 16 / 10; }
+  .visual, .alt .visual { left: var(--margin); right: var(--margin); top: auto; bottom: calc(var(--dock-h) + 80px); width: auto; }
+  .alt .word { bottom: auto; top: 9%; }
+  .pile { width: 56vw; margin-top: 0; }
+  .log { display: none; }
+  .days { display: none; }
+  .status { grid-column: 1 / -1; }
+  .progress { display: none; }
+}
+
+/* No scroll-jacking for reduced motion: the track simply scrolls sideways */
+@media (prefers-reduced-motion: reduce) {
+  .story { overflow-x: auto; }
+  .hud { display: none; }
+}

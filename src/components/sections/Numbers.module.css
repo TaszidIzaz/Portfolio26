@@ -1,0 +1,6 @@
+.numbers { padding-bottom: clamp(80px, 10vw, 160px); }
+.grid { row-gap: 40px; }
+.stat { border-top: 1px solid var(--fg); padding-top: 14px; display: flex; flex-direction: column; gap: 18px; }
+.num { font-size: var(--fs-l); font-weight: 500; line-height: var(--lh-l); display: flex; align-items: flex-start; letter-spacing: var(--ls-head); }
+.suf { line-height: 1; margin-left: .04em; color: var(--accent); }
+.label { white-space: pre-line; }

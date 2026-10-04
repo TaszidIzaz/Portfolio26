@@ -1,0 +1,14 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.curtain i { transform: scaleY(0); outline: 1px solid currentColor; }
+
+@media (max-width: 767px) {
+  .curtain { grid-template-columns: repeat(4, 1fr); }
+  .curtain i:nth-child(n + 5) { display: none; }
+}

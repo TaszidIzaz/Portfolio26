@@ -1,0 +1,34 @@
+/* Swiss pieces — only rendered in Swiss mode (wrapped in [data-only="swiss"]) */
+
+/* Pixel reveal layers (hidden until revealPixels() shows them) */
+.px {
+  --only-display: block;
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; object-fit: cover;
+  image-rendering: pixelated;
+  opacity: 0; visibility: hidden; pointer-events: none;
+}
+
+/* Typographic sticker */
+.sticker {
+  --only-display: inline-block;
+  position: absolute; z-index: 5; white-space: nowrap; pointer-events: auto;
+  padding: 7px 14px; border-radius: 99px;
+  background: var(--fg); color: var(--bg);
+  rotate: var(--r, -4deg);
+  box-shadow: 0 12px 24px -14px rgba(0, 0, 0, .5);
+  transition: rotate .5s var(--ease), scale .5s var(--ease);
+}
+.sticker:hover { rotate: 0deg; scale: 1.06; }
+
+/* Blurred keyword cloud */
+.words {
+  --only-display: flex;
+  position: absolute; z-index: -1; pointer-events: none;
+  flex-wrap: wrap; align-content: flex-end; gap: 0 .35em;
+  font-size: var(--fs-l); line-height: .95; font-weight: 700;
+  letter-spacing: var(--ls-head); text-transform: uppercase;
+  color: color-mix(in srgb, var(--fg) 16%, transparent);
+}
+.words span { filter: blur(var(--b, 7px)); transition: filter .5s var(--ease); white-space: nowrap; }
+

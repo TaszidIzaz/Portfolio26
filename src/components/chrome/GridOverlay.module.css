@@ -1,0 +1,9 @@
+.overlay { position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: 0; transition: opacity .4s var(--ease); }
+.overlay > div { height: 100%; }
+.overlay i {
+  grid-column: auto !important;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  box-shadow: inset 1px 0 color-mix(in srgb, var(--accent) 35%, transparent), inset -1px 0 color-mix(in srgb, var(--accent) 35%, transparent);
+}
+:global(html.show-grid) .overlay { opacity: 1; }
+@media (max-width: 767px) { .overlay i:nth-child(n + 5) { display: none; } }

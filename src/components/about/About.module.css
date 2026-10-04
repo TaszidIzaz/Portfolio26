@@ -1,0 +1,35 @@
+.media { padding-inline: var(--margin); }
+.collage { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: var(--gutter); padding-inline: var(--margin); align-items: end; }
+
+.bio { padding-block: clamp(80px, 11vw, 200px); row-gap: 1.2em; }
+.bio p { max-width: 28em; }
+
+.quote { padding-block: clamp(72px, 9vw, 160px); border-top: 1px solid var(--line); row-gap: 24px; }
+.quote blockquote { max-width: 20em; }
+.quote blockquote::before { content: "“"; }
+.quote blockquote::after { content: "”"; }
+
+.timeline { padding-block: clamp(72px, 9vw, 160px); }
+.years { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(32px, 4vw, 64px) var(--gutter); padding-inline: var(--margin); }
+.year { border-top: 1px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 14px; }
+.year p:last-child { color: var(--muted); max-width: 18em; }
+
+.table { padding-block: clamp(72px, 9vw, 160px); }
+.row { border-top: 1px solid var(--line); padding-block: 18px; align-items: baseline; row-gap: 4px; }
+.row:last-child { border-bottom: 1px solid var(--line); }
+
+.caps { padding-block: clamp(72px, 9vw, 160px); row-gap: 48px; }
+.group { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); padding-top: 14px; }
+.group li { color: var(--muted); }
+
+.people { padding-block: clamp(56px, 7vw, 120px); border-block: 1px solid var(--line); overflow: hidden; }
+.peopleTrack { display: flex; gap: clamp(32px, 4vw, 72px); width: max-content; animation: people 50s linear infinite; }
+.person { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+.person span:last-child { color: var(--muted); }
+@keyframes people { to { transform: translateX(-50%); } }
+
+@media (max-width: 767px) {
+  .years { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .collage { grid-template-columns: 1fr 1fr; }
+  .collage > :first-child { grid-column: 1 / -1; }
+}

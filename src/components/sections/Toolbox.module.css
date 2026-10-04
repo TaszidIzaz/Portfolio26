@@ -1,0 +1,4 @@
+.list { font-size: var(--fs-m); font-weight: 500; line-height: var(--lh-m); letter-spacing: var(--ls-head); }
+.list span { color: var(--faint); transition: color .5s var(--ease); }
+.list span.past { color: var(--muted); }
+.list span.on { color: var(--fg); }

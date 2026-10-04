@@ -1,0 +1,27 @@
+.bar {
+  view-transition-name: topbar; /* stays put during page transitions */
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding-block: 14px; align-items: start;
+  transition: transform .6s var(--ease), background-color .3s;
+}
+.scrolled { background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+.hidden { transform: translateY(-110%); }
+.name { display: flex; flex-direction: column; }
+.nav { display: flex; gap: clamp(14px, 1.6vw, 28px); }
+.link { position: relative; padding-bottom: 3px; }
+.link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+.link:hover::after, .active::after { transform: scaleX(1); transform-origin: left; }
+.avail { text-align: right; }
+.mode { display: inline-flex; align-items: center; gap: 8px; justify-self: start; }
+.modeName { min-width: 7.5ch; }
+.dots { display: inline-flex; gap: 4px; }
+.dots i { width: 8px; height: 8px; box-shadow: inset 0 0 0 1px currentColor; transition: background .3s; }
+:global(html[data-theme="swiss"]) .dots i:nth-child(1),
+:global(html[data-theme="brutalist"]) .dots i:nth-child(2),
+:global(html[data-theme="folk"]) .dots i:nth-child(3) { background: var(--accent); box-shadow: none; }
+
+@media (max-width: 767px) {
+  .nav, .avail, .modeWord { display: none; }
+  .mode { justify-self: end; white-space: nowrap; }
+  .modeName { min-width: 0; }
+}

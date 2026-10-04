@@ -1,0 +1,10 @@
+.intro { padding-top: calc(var(--margin) + 120px); padding-bottom: clamp(56px, 7vw, 120px); }
+.label { margin-bottom: clamp(20px, 3vw, 48px); }
+.title { max-width: 14ch; }
+.lede { margin-top: clamp(24px, 3vw, 48px); max-width: 30em; color: var(--muted); }
+
+/* split: small text + link on the left, statement on the right (bottom aligned) */
+.split { align-items: end; row-gap: 32px; }
+.aside { display: flex; flex-direction: column; gap: 20px; max-width: 22em; }
+.asideLink { display: inline-flex; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 8px; border-bottom: 1px solid currentColor; font-weight: 500; width: min(100%, 260px); }
+.splitTitle { max-width: 18ch; }

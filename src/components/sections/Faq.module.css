@@ -1,0 +1,15 @@
+.grid { row-gap: 48px; }
+.side { position: sticky; top: 100px; align-self: start; display: flex; flex-direction: column; gap: 22px; }
+.title { font-size: var(--fs-l); line-height: var(--lh-l); letter-spacing: var(--ls-head); }
+.lede { color: var(--muted); max-width: 22em; }
+.links { display: flex; flex-wrap: wrap; gap: 18px; font-weight: 500; }
+.item { border-top: 1px solid var(--line); }
+.item:last-child { border-bottom: 1px solid var(--line); }
+.q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-block: 22px; font-size: var(--fs-m); font-weight: 500; line-height: var(--lh-m); letter-spacing: var(--ls-head); }
+.icon { position: relative; width: 22px; height: 22px; flex: none; transition: transform .5s var(--ease), color .3s; }
+.icon::before, .icon::after { content: ""; position: absolute; left: 50%; top: 50%; width: 100%; height: 1.5px; background: currentColor; translate: -50% -50%; }
+.icon::after { rotate: 90deg; }
+.open .icon { transform: rotate(45deg); color: var(--accent); }
+.a { height: 0; overflow: hidden; }
+.a p { padding-bottom: 26px; color: var(--muted); max-width: 34em; font-size: var(--fs-s); line-height: var(--lh-s); }
+@media (max-width: 767px) { .side { position: static; } }

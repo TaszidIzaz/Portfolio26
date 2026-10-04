@@ -1,0 +1,265 @@
+/* =========================================================
+   Global foundations: tokens · modes · reset · grid · type
+   Component styles live next to each component (*.module.css)
+   ========================================================= */
+
+/* ---------- Tokens ---------- */
+:root {
+  --margin: clamp(16px, 2.2vw, 36px);
+  --gutter: clamp(10px, 1.25vw, 20px);
+  /* Letter-spacing: headings tight, everything else (subtexts, body, labels) a touch looser */
+  --ls-head: -0.04em;
+  --ls-text: -0.02em;
+  --ls: var(--ls-head);       /* legacy alias */
+  --ls-label: var(--ls-text); /* legacy alias */
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --ease-page: cubic-bezier(.625, .05, 0, 1); /* page transition curve */
+  --radius: 6px;
+
+  /* Type scale — exactly three sizes, used everywhere */
+  --fs-l: clamp(40px, 4.2vw, 60px);  /* titles: 60px on large screens (mobile override below) */
+  --fs-m: 24px;                       /* secondary text */
+  --fs-s: 16px;                       /* subtext, body, labels */
+  --lh-l: 1; --lh-m: 1.2; --lh-s: 1.45;
+
+  --dock-h: 72px;
+}
+
+/* Registered so they can animate (Brutalist section colours fade). */
+@property --bg { syntax: "<color>"; inherits: true; initial-value: #EEEDE8; }
+@property --fg { syntax: "<color>"; inherits: true; initial-value: #0E0E0E; }
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #FF3B00; }
+@property --on-accent { syntax: "<color>"; inherits: true; initial-value: #FFFFFF; }
+
+/* ---------- Modes ---------- */
+html[data-theme="swiss"] {
+  /* Black and paper only. Sections alternate paper / near-black and blend on scroll (ToneManager),
+     so greys and lines are derived from the current colours. */
+  --bg: #EEEDE8; --fg: #0E0E0E; --accent: #0E0E0E; --on-accent: #EEEDE8;
+  --soft: color-mix(in srgb, var(--fg) 8%, var(--bg));
+  --muted: color-mix(in srgb, var(--fg) 54%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 16%, transparent);
+  --line: color-mix(in srgb, var(--fg) 16%, transparent);
+  --em: var(--muted); --metric: var(--fg);
+  --vt-backdrop: #0E0E0E;
+}
+html[data-theme="brutalist"] {
+  --bg: #EFE8D8; --fg: #141414; --accent: #2D5BD8; --on-accent: #F4EFE4;
+  /* derived from the current tone, so they follow section colours automatically */
+  --soft: color-mix(in srgb, var(--fg) 10%, var(--bg));
+  --muted: color-mix(in srgb, var(--fg) 62%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 22%, transparent);
+  --line: color-mix(in srgb, var(--fg) 28%, transparent);
+  --em: var(--muted); --metric: var(--fg);
+  --vt-backdrop: #141414;
+  --radius: 0px;
+  --font-head: var(--font-remington), var(--font-nhd), ui-monospace, monospace;
+  /* section colours fade into each other */
+  transition: --bg .9s var(--ease), --fg .9s var(--ease), --accent .9s var(--ease), --on-accent .9s var(--ease);
+}
+html[data-theme="folk"] {
+  --bg: #E7E0D0; --fg: #262A1E; --accent: #6F7A35; --on-accent: #F2EDE2;
+  --soft: color-mix(in srgb, var(--fg) 9%, var(--bg));
+  --muted: color-mix(in srgb, var(--fg) 60%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 20%, transparent);
+  --line: color-mix(in srgb, var(--fg) 24%, transparent);
+  --em: var(--accent); --metric: var(--accent);
+  --ink-2: color-mix(in srgb, #8B5A3C 72%, var(--fg)); /* second stamp colour (brown) */
+  --vt-backdrop: #1E231A;
+  --radius: 0px;
+  --font-head: var(--font-feature), Georgia, "Times New Roman", serif;
+  transition: --bg .9s var(--ease), --fg .9s var(--ease), --accent .9s var(--ease), --on-accent .9s var(--ease);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: clip; }
+body {
+  font-family: var(--font-nhd), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: var(--fs-s);
+  line-height: var(--lh-s);
+  letter-spacing: var(--ls-text);
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; }
+main { background: var(--bg); }
+/* Intro hand-over (see Loader): backdrop behind, page slides in ABOVE the loader,
+   clipped to one screen so the GPU only moves a viewport-sized layer. */
+html.is-intro body { background: var(--vt-backdrop); }
+html.is-intro main { position: relative; z-index: 1; height: 100svh; overflow: clip; will-change: transform; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; letter-spacing: inherit; text-align: inherit; }
+ul { list-style: none; }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding-inline: var(--margin);
+}
+.grid > * { grid-column: var(--c, 1 / -1); }
+
+/* ---------- Type styles ----------
+   Three sizes only. Headings (L, M) are Medium at -4%; subtext (S) is Roman at -2%.
+   No italics — <em> inside a heading renders in the muted colour. */
+.t-l, .t-m, .hl { font-weight: 500; letter-spacing: var(--ls-head); }
+.hl, .t-l { font-size: var(--fs-l); line-height: var(--lh-l); }
+.t-m { font-size: var(--fs-m); line-height: var(--lh-m); }
+.t-m.regular { font-weight: 400; }
+.t-s { font-size: var(--fs-s); line-height: var(--lh-s); letter-spacing: var(--ls-text); }
+em { font-style: normal; }
+.hl em, .t-l em, .t-m em { color: var(--em); }
+.label { font-size: var(--fs-s); line-height: var(--lh-s); letter-spacing: var(--ls-text); font-weight: 500; }
+.muted { color: var(--muted); }
+.right { text-align: right; }
+.caps { text-transform: uppercase; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Underline-on-hover link */
+.ul { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .5s var(--ease); padding-bottom: 1px; }
+.ul:hover { background-size: 100% 1px; }
+
+/* Links inside article copy */
+.inline-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); transition: color .3s, text-decoration-color .3s; }
+.inline-link:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+/* Live / availability dot */
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2BD15E; margin-right: 8px; vertical-align: .05em; animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(43, 209, 94, .55); } 80%, 100% { box-shadow: 0 0 0 8px rgba(43, 209, 94, 0); } }
+
+/* Section rhythm */
+.sec { padding-block: clamp(96px, 13vw, 220px); position: relative; }
+
+/* Mode-specific content */
+[data-only] { display: none; }
+html[data-theme="swiss"] [data-only~="swiss"],
+html[data-theme="brutalist"] [data-only~="brutalist"],
+html[data-theme="folk"] [data-only~="folk"] { display: var(--only-display, inline); }
+.swap { display: inline-grid; }
+.swap > span { grid-area: 1 / 1; visibility: hidden; }
+html[data-theme="swiss"] .swap [data-t="swiss"],
+html[data-theme="brutalist"] .swap [data-t="brutalist"],
+html[data-theme="folk"] .swap [data-t="folk"] { visibility: visible; }
+
+/* SplitText line masks: room for descenders */
+.ln-mask { padding-bottom: .1em; margin-bottom: -.1em; }
+
+/* Skip link */
+.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--fg); color: var(--bg); padding: 10px 14px; border-radius: 8px; }
+.skip:focus { top: 12px; }
+
+/* Grid overlay toggle */
+html.show-grid { --grid-overlay: 1; }
+
+/* ---------- Brutalist mode: typewriter type, graph paper, grain, hard edges ---------- */
+html[data-theme="brutalist"] :is(.t-l, .t-m, .hl, .label, h1, h2, h3, blockquote, button,
+  [class*="__title"], [class*="__num"], [class*="__mail"], [class*="__list"], [class*="__track"],
+  [class*="__word"], [class*="__count"], [class*="__q"], [class*="__name"], [class*="__narr"], [class*="__idx"]),
+html[data-theme="brutalist"] [class*="About-module"][class*="__text"] {
+  font-family: var(--font-head);
+  font-weight: 400;
+  letter-spacing: -0.09em;
+}
+html[data-theme="brutalist"] :is(.t-l, .t-m, .hl, h1, h2, h3, [class*="__title"]) { letter-spacing: -0.16em; }
+html[data-theme="brutalist"] .label { letter-spacing: -0.05em; }
+html[data-theme="brutalist"] :is(button, [class*="Button-module"], [class*="__toggle"]) { letter-spacing: -0.04em; }
+html[data-theme="brutalist"] :is([class*="__chip"], [class*="__tags"] li, [class*="__chips"] i, .dot) { border-radius: 0; }
+html[data-theme="brutalist"] main {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--fg) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--fg) 7%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+html[data-theme="brutalist"] body::after {
+  content: ""; position: fixed; inset: 0; z-index: 85; pointer-events: none;
+  opacity: .22; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+html[data-theme="brutalist"] img, html[data-theme="brutalist"] video { filter: contrast(1.06) saturate(1.05); }
+
+/* ---------- Swiss mode: stacked sections, blurred words ---------- */
+/* main is a stacking context so decorative layers (z-index: -1) sit above its background, behind content */
+html[data-theme="swiss"] main { position: relative; z-index: 0; }
+html[data-theme="swiss"].is-intro main { z-index: 1; }
+html[data-theme="swiss"] { transition: --bg .5s var(--ease), --fg .5s var(--ease), --accent .5s var(--ease), --on-accent .5s var(--ease); }
+/* Each top-level section is a sheet with its own colour (set by SwissStack); greys follow that colour. */
+html[data-theme="swiss"] [data-swiss-tone] {
+  position: relative; background: var(--bg); color: var(--fg);
+  --soft: color-mix(in srgb, var(--fg) 8%, var(--bg));
+  --muted: color-mix(in srgb, var(--fg) 54%, transparent);
+  --faint: color-mix(in srgb, var(--fg) 16%, transparent);
+  --line: color-mix(in srgb, var(--fg) 16%, transparent);
+}
+html[data-theme="swiss"] [data-swiss-tone="paper"] { --bg: #EEEDE8; --fg: #0E0E0E; --accent: #0E0E0E; --on-accent: #EEEDE8; }
+html[data-theme="swiss"] [data-swiss-tone="ink"] { --bg: #0B0B0B; --fg: #EEEDE8; --accent: #EEEDE8; --on-accent: #0B0B0B; }
+html[data-theme="swiss"] [data-swiss-tone] > [data-narrate] { background: var(--bg); } /* pinned sections keep their colour */
+/* Dims a sheet as the next one slides over it */
+html[data-theme="swiss"] [data-swiss-tone]::after {
+  content: ""; position: absolute; inset: 0; z-index: 60; pointer-events: none;
+  background: #000; opacity: var(--cover, 0);
+}
+
+/* ---------- Almanac mode (id: folk): editorial serif, printed paper, halftone ---------- */
+html[data-theme="folk"] :is(.t-l, .t-m, .hl, h1, h2, h3, blockquote,
+  [class*="__title"], [class*="__num"], [class*="__mail"], [class*="__q"], [class*="__word"], [class*="__count"]),
+html[data-theme="folk"] [class*="About-module"][class*="__text"] {
+  font-family: var(--font-head);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+html[data-theme="folk"] :is([class*="__chip"], [class*="__tags"] li, [class*="__chips"] i) { border-radius: 0; }
+/* Paper: fine grain + sparse fibre flecks */
+html[data-theme="folk"] body::after {
+  content: ""; position: fixed; inset: 0; z-index: 85; pointer-events: none;
+  opacity: .3; mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.18 .5' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .18  0 0 0 0 .08  9 0 0 0 -5.7'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .45 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+/* Printed photos: warmer, a little faded, with a halftone screen on top */
+html[data-theme="folk"] img, html[data-theme="folk"] video { filter: sepia(.16) saturate(.84) contrast(1.04); }
+html[data-theme="folk"] .print::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(circle, rgba(24, 20, 10, .26) .8px, transparent 1.3px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Page transitions (View Transitions API) ----------
+   Old page: shrinks + dims, then slides half off to the left with a tilt.
+   New page: slides in from the right, tilted and scaled, then settles. */
+::view-transition { background: var(--vt-backdrop); }
+::view-transition-group(root) { animation: none; background: var(--vt-backdrop); }
+::view-transition-old(root),
+::view-transition-new(root) { transform-origin: 50% 100%; mix-blend-mode: normal; }
+::view-transition-old(root) {
+  animation:
+    vt-shrink .6s var(--ease-page) both,
+    vt-away .8s var(--ease-page) .1s both;
+}
+::view-transition-new(root) { animation: vt-in .8s var(--ease-page) .1s both; }
+@keyframes vt-shrink { to { scale: .8; opacity: .8; } }
+@keyframes vt-away { to { translate: -50% 0; rotate: -5deg; } }
+@keyframes vt-in { from { translate: 100% 0; rotate: 5deg; scale: .85; } }
+
+@media (max-width: 767px) {
+  :root { --fs-l: clamp(40px, 12.5vw, 48px); } /* titles on phones: ~2x the old 24px */
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid > * { grid-column: var(--cm, 1 / -1); }
+  .hide-m { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

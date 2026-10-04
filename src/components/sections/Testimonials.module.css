@@ -1,0 +1,11 @@
+.viewport { overflow: hidden; cursor: grab; touch-action: pan-y; }
+.track { display: flex; will-change: transform; }
+.quote { flex: 0 0 100%; row-gap: 32px; user-select: none; }
+.quote blockquote { font-size: var(--fs-m); font-weight: 500; line-height: var(--lh-m); max-width: 22em; letter-spacing: var(--ls-head); }
+.person { display: flex; align-items: center; gap: 14px; font-size: var(--fs-s); }
+.avatar { position: relative; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: var(--soft); flex: none; }
+.avatar img { object-fit: cover; }
+.person > span:last-child { display: flex; flex-direction: column; }
+.person b { font-weight: 500; }
+.ctrl { margin-top: clamp(40px, 5vw, 80px); align-items: center; }
+.btns { display: flex; justify-content: flex-end; gap: 8px; }

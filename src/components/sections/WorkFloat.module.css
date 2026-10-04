@@ -1,0 +1,42 @@
+/* Floating, staggered work layout (after art-yakushev.com/work) */
+.float { row-gap: clamp(80px, 10vw, 180px); align-items: start; }
+
+.card { position: relative; display: flex; flex-direction: column; gap: 14px; will-change: transform; }
+.offset { margin-top: clamp(120px, 30vw, 520px); } /* small card starts lower than its neighbour */
+
+.frame { position: relative; overflow: hidden; background: var(--soft); will-change: clip-path; }
+.media { position: absolute; left: 0; right: 0; top: -12%; height: 124%; will-change: transform; }
+.media img { object-fit: cover; transition: scale 1.2s var(--ease); }
+.card:hover .media img { scale: 1.04; }
+
+/* Brutalist: hard offset shadow (on a wrapper, because the frame's clip-path would cut it off) */
+:global(html[data-theme="brutalist"]) .shot { filter: drop-shadow(10px 10px 0 var(--fg)); }
+:global(html[data-theme="brutalist"]) .frame { outline: 2px solid var(--fg); outline-offset: -2px; }
+:global(html[data-theme="brutalist"]) .preview { border-radius: 0; outline: 2px solid var(--fg); box-shadow: 8px 8px 0 var(--fg); }
+
+/* Floating preview over big/large/medium cards */
+.preview {
+  position: absolute; z-index: 2;
+  left: 50%; top: 50%; width: 58%; aspect-ratio: 16 / 10;
+  translate: -50% -50%;
+  overflow: hidden; border-radius: 4px;
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .55);
+  will-change: transform;
+  transition: scale .8s var(--ease);
+}
+.card:hover .preview { scale: 1.05; }
+.preview img, .preview video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.meta { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 6px 16px; }
+.idx { color: var(--muted); }
+.title { transition: color .3s; }
+.card:hover .title { color: var(--accent); }
+.tag { color: var(--muted); }
+.cta { grid-column: 2 / -1; display: inline-flex; gap: 10px; }
+
+@media (max-width: 767px) {
+  .float { row-gap: 64px; }
+  .offset { margin-top: 0; }
+  .card { grid-row: auto !important; }
+  .preview { width: 64%; }
+}

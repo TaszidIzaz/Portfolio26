@@ -1,0 +1,27 @@
+.principles { padding-block: clamp(72px, 9vw, 160px); row-gap: clamp(40px, 5vw, 80px); align-items: start; }
+.pIntro { max-width: 12ch; }
+.principle { border-top: 1px solid var(--fg); padding-top: 14px; display: flex; flex-direction: column; gap: clamp(24px, 3vw, 48px); }
+.principle p:last-child { color: var(--muted); }
+.pImg { align-self: stretch; }
+
+.steps { padding-block: clamp(72px, 9vw, 160px); }
+.step { border-top: 1px solid var(--line); padding-block: clamp(28px, 3vw, 48px); row-gap: 16px; align-items: start; }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step .num { color: var(--muted); }
+.deliverables { display: flex; flex-direction: column; gap: 6px; }
+.deliverables li { color: var(--muted); }
+.deliverables li::before { content: "↳ "; }
+
+.services { padding-block: clamp(72px, 9vw, 160px); row-gap: 40px; }
+.service { border-top: 1px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 18px; }
+.service ul { display: flex; flex-direction: column; gap: 6px; }
+.service li { color: var(--muted); }
+
+.engage { padding-block: clamp(72px, 9vw, 160px); row-gap: var(--gutter); }
+.card {
+  background: var(--soft); border-radius: var(--radius);
+  padding: clamp(20px, 2.4vw, 36px);
+  display: flex; flex-direction: column; gap: clamp(28px, 4vw, 64px); min-height: clamp(260px, 26vw, 420px);
+  justify-content: space-between;
+}
+.card p:last-of-type { color: var(--muted); max-width: 22em; }

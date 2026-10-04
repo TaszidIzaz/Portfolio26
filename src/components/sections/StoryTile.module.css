@@ -1,0 +1,48 @@
+/* Pictogram tile: blurred colour field + woven texture + white pictogram */
+.tile {
+  --t1: #6E8DBF; --t2: #C9D6EA; --picto: #fff;
+  position: relative; overflow: hidden; isolation: isolate;
+  aspect-ratio: 4 / 3; border-radius: var(--radius);
+  background:
+    radial-gradient(55% 60% at 22% 28%, var(--t2), transparent 70%),
+    radial-gradient(50% 55% at 82% 78%, color-mix(in srgb, var(--t1) 55%, #000), transparent 72%),
+    radial-gradient(40% 40% at 70% 20%, color-mix(in srgb, var(--t2) 60%, var(--t1)), transparent 70%),
+    var(--t1);
+}
+/* Woven fabric + grain, like a print on denim */
+.tile::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, .09) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, .08) 0 1px, transparent 1px 5px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+.picto { position: absolute; z-index: 1; left: 50%; top: 50%; width: 58%; height: 72%; translate: -50% -50%; color: var(--picto); overflow: visible; }
+.num { position: absolute; z-index: 2; left: 10px; top: 8px; color: var(--picto); opacity: .9; font-variant-numeric: tabular-nums; }
+
+/* Brutalist: the saturated brights of the reference */
+:global(html[data-theme="brutalist"]) .tile[data-tone="0"] { --t1: #E07F9C; --t2: #F6B8C8; }
+:global(html[data-theme="brutalist"]) .tile[data-tone="1"] { --t1: #7E7A55; --t2: #C2483A; }
+:global(html[data-theme="brutalist"]) .tile[data-tone="2"] { --t1: #3F8A66; --t2: #E8A170; }
+:global(html[data-theme="brutalist"]) .tile[data-tone="3"] { --t1: #D8CBB4; --t2: #4A3E33; }
+:global(html[data-theme="brutalist"]) .tile[data-tone="4"] { --t1: #DD9C7B; --t2: #F3D2BC; }
+:global(html[data-theme="brutalist"]) .tile[data-tone="5"] { --t1: #5F82BB; --t2: #B9CBE6; }
+
+/* Swiss: greys only */
+:global(html[data-theme="swiss"]) .tile { filter: grayscale(1); }
+:global(html[data-theme="swiss"]) .tile[data-tone="0"] { --t1: #2E2E2E; --t2: #777; }
+:global(html[data-theme="swiss"]) .tile[data-tone="1"] { --t1: #4A4A4A; --t2: #A0A0A0; }
+:global(html[data-theme="swiss"]) .tile[data-tone="2"] { --t1: #1C1C1C; --t2: #5A5A5A; }
+:global(html[data-theme="swiss"]) .tile[data-tone="3"] { --t1: #9A9A97; --t2: #D6D6D2; --picto: #0E0E0E; }
+:global(html[data-theme="swiss"]) .tile[data-tone="4"] { --t1: #3A3A3A; --t2: #858585; }
+:global(html[data-theme="swiss"]) .tile[data-tone="5"] { --t1: #626262; --t2: #BDBDBD; }
+
+/* Almanac: earth tones, cream ink, hand-cut edges (filter set in the component) */
+:global(html[data-theme="folk"]) .tile { --picto: #F4EDDC; }
+:global(html[data-theme="folk"]) .tile[data-tone="0"] { --t1: #8E9D7C; --t2: #D6D0B4; }
+:global(html[data-theme="folk"]) .tile[data-tone="1"] { --t1: #94553A; --t2: #C98A5E; }
+:global(html[data-theme="folk"]) .tile[data-tone="2"] { --t1: #5E6B34; --t2: #A3AB70; }
+:global(html[data-theme="folk"]) .tile[data-tone="3"] { --t1: #A9845A; --t2: #E0C69C; }
+:global(html[data-theme="folk"]) .tile[data-tone="4"] { --t1: #B89842; --t2: #E6D59A; }
+:global(html[data-theme="folk"]) .tile[data-tone="5"] { --t1: #AE6A50; --t2: #DFA88A; }

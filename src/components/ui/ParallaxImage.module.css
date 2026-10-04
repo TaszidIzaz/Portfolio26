@@ -1,0 +1,4 @@
+.figure { position: relative; overflow: hidden; background: var(--soft); will-change: clip-path; }
+.figure img { object-fit: cover; will-change: transform; }
+.caption { margin-top: 10px; color: var(--muted); }
+.video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }

@@ -1,0 +1,45 @@
+/* Services as stacking cards (after storeyarchitecture.co.uk) */
+.expertise { position: relative; padding-top: clamp(96px, 13vw, 220px); padding-bottom: clamp(64px, 8vw, 140px); }
+.head { align-items: start; row-gap: 24px; margin-bottom: clamp(56px, 8vw, 140px); }
+.title { font-size: var(--fs-l); line-height: var(--lh-l); letter-spacing: var(--ls-head); }
+.intro { max-width: 22em; }
+
+/* Extra room at the end so the last card rests a moment before the stack scrolls away */
+.stack { padding-bottom: 18svh; }
+
+/* Each card sticks just below the top bar; a few px of every earlier card stay visible, like a stack */
+.card {
+  --top: calc(var(--margin) + 64px + var(--i) * 12px);
+  position: sticky; top: var(--top);
+  overflow: hidden;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.body {
+  display: flex; flex-direction: column; justify-content: space-between; gap: clamp(32px, 5vw, 80px);
+  min-height: min(74svh, 760px); padding-block: 18px clamp(24px, 3vw, 48px);
+  transform-origin: 50% 0%; will-change: transform;
+}
+.shade { position: absolute; inset: 0; z-index: 2; background: #000; opacity: 0; pointer-events: none; }
+
+.row, .row2 { row-gap: 20px; align-items: start; }
+.row2 { align-items: end; }
+.cardTitle { max-width: 14em; }
+.text { max-width: 24em; }
+.points { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--gutter); max-width: 34em; }
+.points li { padding-block: 9px; border-top: 1px solid var(--line); }
+.img { position: relative; aspect-ratio: 5 / 3; overflow: hidden; background: var(--soft); border-radius: var(--radius); }
+.img img { object-fit: cover; transition: scale 1.2s var(--ease); }
+.card:hover .img img { scale: 1.04; }
+.num { justify-self: end; font-size: var(--fs-l); line-height: .8; font-weight: 500; letter-spacing: var(--ls-head); color: var(--faint); font-variant-numeric: tabular-nums; }
+
+/* Modes */
+:global(html[data-theme="brutalist"]) .card { border-top: 2px solid var(--fg); }
+:global(html[data-theme="brutalist"]) .img { outline: 2px solid var(--fg); outline-offset: -2px; box-shadow: 6px 6px 0 var(--fg); }
+
+@media (max-width: 767px) {
+  .card { --top: calc(72px + var(--i) * 8px); }
+  .body { min-height: auto; gap: 24px; }
+  .points { grid-template-columns: 1fr; }
+  .num { justify-self: start; }
+}

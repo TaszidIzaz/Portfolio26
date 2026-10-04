@@ -1,0 +1,26 @@
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  height: 52px; padding: 0 22px;
+  border-radius: 99px; font-size: var(--fs-s); font-weight: 500;
+  transition: background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease);
+  will-change: transform;
+}
+.solid { background: var(--fg); color: var(--bg); }
+.solid:hover { background: var(--accent); color: var(--on-accent); }
+.accent { background: var(--accent); color: var(--on-accent); }
+.accent:hover { background: var(--fg); color: var(--bg); }
+.ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg); }
+.ghost:hover { box-shadow: inset 0 0 0 1px transparent; background: var(--fg); color: var(--bg); }
+.round { width: 52px; padding: 0; justify-content: center; font-size: var(--fs-m); box-shadow: inset 0 0 0 1px var(--line); }
+.round:hover { background: var(--fg); color: var(--bg); }
+.arr { display: inline-block; transition: transform .45s var(--ease); }
+.btn:hover .arr { transform: rotate(45deg); }
+
+/* Brutalist: square, hard offset shadow, press-in on hover */
+:global(html[data-theme="brutalist"]) .btn { border-radius: 0; box-shadow: 5px 5px 0 var(--fg), inset 0 0 0 2px var(--fg); }
+:global(html[data-theme="brutalist"]) .solid { box-shadow: 5px 5px 0 var(--accent); }
+:global(html[data-theme="brutalist"]) .btn:hover { box-shadow: 2px 2px 0 var(--fg), inset 0 0 0 2px var(--fg); }
+
+/* Folk: square, printed-label feel */
+:global(html[data-theme="folk"]) .btn { border-radius: 0; }
+:global(html[data-theme="folk"]) .round { border-radius: 50%; }
