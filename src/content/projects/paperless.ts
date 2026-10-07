@@ -6,6 +6,7 @@ export const paperless: Project = {
   title: 'Paperless',
   summary: 'Brand identity and launch kit for an AI tax and compliance assistant.',
   tags: ['Creative Direction', 'Brand Identity', 'Launch Kit'],
+  type: 'Brand Identity',
   metric: { value: '5 wks', label: 'from mood boards to a full launch kit' },
   images: [
     { kind: 'image', src: '/images/projects/paperless/cover.jpg', alt: 'Paperless — cover', width: 'a' },

@@ -9,6 +9,7 @@ export const algorizin: Project = {
   title: 'Algorizin OPT',
   summary: 'Making OPT self-employment painless for international students.',
   tags: ['Product Design', 'Web Dev', 'UX Research'],
+  type: 'Product & Website',
   year: 2024,
   metric: { value: '100s', label: 'of students onboarded in the first few months' },
   images: [

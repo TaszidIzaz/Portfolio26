@@ -6,6 +6,7 @@ export const bsic: Project = {
   title: 'BSIC',
   summary: 'Brand and launch identity for Bangladesh’s first bank-backed startup investment company.',
   tags: ['Creative Direction', 'Brand Identity', 'Event Identity'],
+  type: 'Brand & Launch',
   metric: { value: '39', label: 'banks backing the fund' },
   images: [
     { kind: 'image', src: '/images/projects/bsic/cover.jpg', alt: 'BSIC — cover', width: 'a' },

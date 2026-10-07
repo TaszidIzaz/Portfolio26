@@ -9,6 +9,7 @@ export const fizclo: Project = {
   title: 'FIZCLO',
   summary: 'AI-driven personalisation that made shoppers actually finish checkout.',
   tags: ['E-commerce', 'AI Integration', 'Frontend'],
+  type: 'E-commerce',
   year: 2025,
   metric: { value: '+45%', label: 'average order value, −35% cart abandonment' },
   images: [

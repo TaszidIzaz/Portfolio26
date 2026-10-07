@@ -33,6 +33,8 @@ export interface Project {
   /** One-liner used in lists */
   summary: string;
   tags: string[];
+  /** Short kind of work for the grid caption, e.g. "Rebrand & Website" (falls back to the first tag) */
+  type?: string;
   year?: number;
   metric?: { value: string; label: string };
   /** Strip shown on list rows */

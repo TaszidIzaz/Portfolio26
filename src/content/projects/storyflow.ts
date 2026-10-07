@@ -6,6 +6,7 @@ export const storyflow: Project = {
   title: 'Storyflow',
   summary: 'Website for a social-first creative agency focused on culture and storytelling.',
   tags: ['Creative Direction', 'Web Design', 'UI/UX'],
+  type: 'Website',
   images: [
     { kind: 'image', src: '/images/projects/storyflow/cover.jpg', alt: 'Storyflow — cover', width: 'a' },
     { kind: 'image', src: '/images/projects/storyflow/01-poster.jpg', alt: 'Storyflow — visual 1', width: 'b' },
