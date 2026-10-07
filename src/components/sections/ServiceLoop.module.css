@@ -1,0 +1,86 @@
+/* Service loops: SVG + CSS keyframes, coloured from the current mode */
+.loop { position: relative; aspect-ratio: 5 / 3; overflow: hidden; background: var(--soft); border-radius: var(--radius); color: var(--fg); }
+.loop svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.loop * { animation-iteration-count: infinite; animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+.loop[data-playing="false"] * { animation-play-state: paused; }
+
+/* Paint */
+.fg { fill: var(--fg); }
+.accent { fill: var(--accent); }
+.mid { fill: color-mix(in srgb, var(--fg) 22%, transparent); }
+.stroke { fill: none; stroke: var(--fg); stroke-width: 2; }
+.frame { fill: var(--bg); stroke: var(--fg); stroke-width: 2; }
+.onAccent { fill: none; stroke: var(--on-accent); stroke-width: 3; stroke-linecap: round; }
+.grid line { stroke: color-mix(in srgb, var(--fg) 16%, transparent); stroke-width: 1; }
+
+/* Shared fade so each loop restarts unseen */
+.all { animation: fade var(--d) infinite; }
+@keyframes fade { 0% { opacity: 0; } 5% { opacity: 1; } 88% { opacity: 1; } 96%, 100% { opacity: 0; } }
+
+/* ---------- Brand: construct → palette → type ---------- */
+.brand { --d: 6s; }
+.bCircle { fill: none; stroke: var(--fg); stroke-width: 2; stroke-dasharray: 100; animation: bDraw 6s infinite; }
+@keyframes bDraw { 0% { stroke-dashoffset: 100; } 25%, 100% { stroke-dashoffset: 0; } }
+.bWedge { fill: var(--accent); transform-box: view-box; transform-origin: 260px 240px; animation: bWedge 6s infinite; }
+@keyframes bWedge { 0%, 24% { transform: scale(0) rotate(-45deg); } 38%, 100% { transform: scale(1) rotate(0); } }
+.bSquare { fill: var(--bg); stroke: var(--fg); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: bSquare 6s infinite; }
+@keyframes bSquare { 0%, 36% { transform: scale(0) rotate(-90deg); } 52%, 100% { transform: scale(1) rotate(0); } }
+.bSwatches rect { transform-box: fill-box; transform-origin: 50% 100%; animation: bPop 6s infinite; }
+.bSwatches rect:nth-child(2) { animation-delay: .25s; }
+.bSwatches rect:nth-child(3) { animation-delay: .5s; }
+@keyframes bPop { 0%, 52% { transform: scaleY(0); } 62%, 100% { transform: scaleY(1); } }
+.bType { fill: var(--fg); font-size: 168px; font-weight: 500; letter-spacing: -.04em; animation: bType 6s infinite; }
+@keyframes bType { 0%, 64% { opacity: 0; transform: translateY(12px); } 74%, 100% { opacity: 1; transform: none; } }
+
+/* ---------- Web: page scrolls, cursor clicks ---------- */
+.wScroll { animation: wScroll 8s infinite; }
+@keyframes wScroll { 0%, 14% { transform: translateY(0); } 42%, 56% { transform: translateY(-220px); } 86%, 100% { transform: translateY(-440px); } }
+.wBtn { transform-box: fill-box; transform-origin: center; animation: wClick 8s infinite; }
+@keyframes wClick { 0%, 9% { transform: scale(1); } 11% { transform: scale(.86); } 14%, 100% { transform: scale(1); } }
+.wCursor { fill: var(--fg); stroke: var(--bg); stroke-width: 1.5; transform: translate(600px, 380px); animation: wCursor 8s infinite; }
+@keyframes wCursor {
+  0% { transform: translate(600px, 380px); }
+  9% { transform: translate(162px, 210px); }
+  11% { transform: translate(162px, 210px) scale(.85); }
+  14% { transform: translate(162px, 210px); }
+  40% { transform: translate(470px, 320px); }
+  70% { transform: translate(330px, 260px); }
+  100% { transform: translate(600px, 380px); }
+}
+
+/* ---------- Product: swipe, restack, toggle, tap ---------- */
+.pC1 { animation: pOut 6s infinite; }
+@keyframes pOut { 0%, 14% { transform: none; opacity: 1; } 30%, 100% { transform: translateX(-180px); opacity: 0; } }
+.pC2, .pC3, .pC4 { animation: pUp 6s infinite; }
+@keyframes pUp { 0%, 28% { transform: none; } 44%, 100% { transform: translateY(-80px); } }
+.pTrack { animation: pTrack 6s infinite; }
+@keyframes pTrack { 0%, 48% { opacity: 0; } 56%, 88% { opacity: 1; } 96%, 100% { opacity: 0; } }
+.pKnob { fill: var(--fg); animation: pKnob 6s infinite; }
+@keyframes pKnob { 0%, 48% { transform: none; } 56%, 88% { transform: translateX(22px); } 96%, 100% { transform: none; } }
+.pNote { transform-box: fill-box; transform-origin: center; animation: pNote 6s infinite; }
+@keyframes pNote { 0%, 68% { opacity: 0; transform: translateY(14px) scale(.94); } 76%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; transform: none; } }
+.pKnob { stroke: var(--bg); stroke-width: 2.5; }
+.pFab { transform-box: fill-box; transform-origin: center; animation: pTap 6s infinite; }
+@keyframes pTap { 0%, 62% { transform: scale(1); } 65% { transform: scale(.88); } 70%, 100% { transform: scale(1); } }
+.ripple { fill: var(--accent); opacity: 0; transform-box: fill-box; transform-origin: center; animation: pRipple 6s infinite; }
+@keyframes pRipple { 0%, 63% { opacity: 0; transform: scale(1); } 65% { opacity: .35; transform: scale(1); } 82%, 100% { opacity: 0; transform: scale(2.4); } }
+
+/* ---------- Direction: reshuffle, crop, circle, tick ---------- */
+.direction { --d: 7s; }
+.dA { animation: dA 7s infinite; }
+@keyframes dA { 0%, 12% { transform: none; } 30%, 100% { transform: translateX(190px); } }
+.dB { animation: dB 7s infinite; }
+@keyframes dB { 0%, 12% { transform: none; } 30%, 100% { transform: translateX(-190px); } }
+.dCrop { fill: none; stroke: var(--fg); stroke-width: 2; stroke-dasharray: 6 5; transform-box: fill-box; transform-origin: center; animation: dCrop 7s infinite; }
+@keyframes dCrop { 0%, 32% { opacity: 0; transform: scale(1.12); } 46%, 100% { opacity: 1; transform: scale(1); } }
+.dCircle { fill: none; stroke: var(--fg); stroke-width: 2.5; stroke-dasharray: 100; animation: dCircle 7s infinite; }
+@keyframes dCircle { 0%, 50% { stroke-dashoffset: 100; } 66%, 100% { stroke-dashoffset: 0; } }
+.dTick { fill: none; stroke: var(--fg); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; animation: dTick 7s infinite; }
+@keyframes dTick { 0%, 65% { stroke-dashoffset: 100; opacity: 0; } 66% { opacity: 1; } 74%, 100% { stroke-dashoffset: 0; opacity: 1; } }
+
+/* Brutalist keeps its hard edges */
+:global(html[data-theme="brutalist"]) .loop { outline: 2px solid var(--fg); outline-offset: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .loop * { animation: none !important; }
+}

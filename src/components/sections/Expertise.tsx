@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useRef } from 'react';
 import { SectionHead } from '@/components/ui/SectionHead';
 import { SplitHeading } from '@/components/ui/SplitHeading';
@@ -8,6 +7,7 @@ import { expertise } from '@/content/home';
 import { col } from '@/lib/grid';
 import { gsap, useGSAP } from '@/lib/gsap';
 import styles from './Expertise.module.css';
+import { ServiceLoop } from './ServiceLoop';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -51,17 +51,17 @@ export function Expertise({ index = '03' }: { index?: string }) {
           <article key={s.title} className={styles.card} style={{ ['--i' as string]: i }} data-card>
             <div className={styles.body} data-body>
               <div className={`grid ${styles.row}`}>
-                <h3 className={`t-m ${styles.cardTitle}`} style={col('1/6', '1/-1')}>{s.title}</h3>
+                <h3 className={styles.cardTitle} style={col('1/6', '1/-1')}>{s.title}</h3>
                 <p className={`t-m regular ${styles.text}`} style={col('7/12', '1/-1')}>{s.text}</p>
               </div>
               <div className={`grid ${styles.row2}`}>
                 <ul className={`t-s ${styles.points}`} style={col('1/6', '1/-1')}>
                   {s.points.map((p) => <li key={p}>{p}</li>)}
                 </ul>
-                <figure className={`${styles.img} print`} style={col('7/10', '1/-1')}>
-                  <Image src={s.image.src} alt={s.image.alt} fill sizes="(max-width: 767px) 92vw, 26vw" />
-                </figure>
-                <span className={styles.num} style={col('11/13', '1/-1')} aria-hidden>{pad(i + 1)}</span>
+                <div className={styles.clip} style={col('7/12', '1/-1')}>
+                  <ServiceLoop kind={s.loop} label={`Animation: ${s.title}`} />
+                </div>
+                <span className={styles.num} style={col('12/13', '1/-1')} aria-hidden>{pad(i + 1)}</span>
               </div>
             </div>
             <span className={styles.shade} data-shade aria-hidden />

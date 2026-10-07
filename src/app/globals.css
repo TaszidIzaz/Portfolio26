@@ -26,7 +26,7 @@
 }
 
 /* Registered so they can animate (Brutalist section colours fade). */
-@property --bg { syntax: "<color>"; inherits: true; initial-value: #EEEDE8; }
+@property --bg { syntax: "<color>"; inherits: true; initial-value: #FFFFFF; }
 @property --fg { syntax: "<color>"; inherits: true; initial-value: #0E0E0E; }
 @property --accent { syntax: "<color>"; inherits: true; initial-value: #FF3B00; }
 @property --on-accent { syntax: "<color>"; inherits: true; initial-value: #FFFFFF; }
@@ -35,7 +35,7 @@
 html[data-theme="swiss"] {
   /* Black and paper only. Sections alternate paper / near-black and blend on scroll (ToneManager),
      so greys and lines are derived from the current colours. */
-  --bg: #EEEDE8; --fg: #0E0E0E; --accent: #0E0E0E; --on-accent: #EEEDE8;
+  --bg: #FFFFFF; --fg: #0E0E0E; --accent: #0E0E0E; --on-accent: #FFFFFF;
   --soft: color-mix(in srgb, var(--fg) 8%, var(--bg));
   --muted: color-mix(in srgb, var(--fg) 54%, transparent);
   --faint: color-mix(in srgb, var(--fg) 16%, transparent);
@@ -201,9 +201,10 @@ html[data-theme="swiss"] [data-swiss-tone] {
   --muted: color-mix(in srgb, var(--fg) 54%, transparent);
   --faint: color-mix(in srgb, var(--fg) 16%, transparent);
   --line: color-mix(in srgb, var(--fg) 16%, transparent);
+  --em: var(--muted); --metric: var(--fg); /* re-derived per sheet, or they'd keep the page-level colour */
 }
-html[data-theme="swiss"] [data-swiss-tone="paper"] { --bg: #EEEDE8; --fg: #0E0E0E; --accent: #0E0E0E; --on-accent: #EEEDE8; }
-html[data-theme="swiss"] [data-swiss-tone="ink"] { --bg: #0B0B0B; --fg: #EEEDE8; --accent: #EEEDE8; --on-accent: #0B0B0B; }
+html[data-theme="swiss"] [data-swiss-tone="paper"] { --bg: #FFFFFF; --fg: #0E0E0E; --accent: #0E0E0E; --on-accent: #FFFFFF; }
+html[data-theme="swiss"] [data-swiss-tone="ink"] { --bg: #0B0B0B; --fg: #FFFFFF; --accent: #FFFFFF; --on-accent: #0B0B0B; }
 html[data-theme="swiss"] [data-swiss-tone] > [data-narrate] { background: var(--bg); } /* pinned sections keep their colour */
 /* Dims a sheet as the next one slides over it */
 html[data-theme="swiss"] [data-swiss-tone]::after {

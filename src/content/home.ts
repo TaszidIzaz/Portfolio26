@@ -122,9 +122,9 @@ export const about = {
 
 export const stats = [
   { value: '5', suffix: '+', label: 'Years of design judgement\nbehind every AI draft' },
-  { value: '30', suffix: '+', label: 'Brands worked with,\nfrom Dhaka to Miami' },
+  { value: '50', suffix: '+', label: 'Brands worked with,\nfrom Dhaka to Miami' },
   { value: '10', suffix: '+', label: 'AI-powered products\nbuilt' },
-  { value: '600', suffix: '+', label: 'Website sections designed\nat SquidX alone' },
+  { value: '7', suffix: '\u00a0days', label: 'From first call to a\ntested prototype' },
 ];
 
 export const ticker = [
@@ -147,25 +147,25 @@ export const expertise = {
       title: 'Brand & Visual Systems',
       text: 'Identities that hold together everywhere they show up, from the logo to the last social post.',
       points: ['Logo & Identity Systems', 'Visual Identity Development', 'Brand Design Systems', 'Art & Illustration', 'Packaging Design', 'Brand Applications (Digital & Physical)'],
-      image: { src: '/images/projects/paperless/cover.jpg', w: 1920, h: 1080, alt: 'Paperless brand identity' },
+      loop: 'brand' as const,
     },
     {
       title: 'Website Design & Development',
       text: 'Websites that look considered and are built to perform: designed in Figma, built in Next.js or Webflow, shipped fast with AI in the loop.',
       points: ['Marketing & Landing Pages', 'Portfolio & Editorial Sites', 'E-commerce & Product Pages', 'Web Design Systems', 'Motion & Interaction', 'Development in Next.js & Webflow'],
-      image: { src: '/images/shots/bespoke.webp', w: 2000, h: 1469, alt: 'A tailoring website' },
+      loop: 'web' as const,
     },
     {
       title: 'Product & Interaction Design',
       text: 'Apps and platforms people understand on first use, researched, prototyped and tested before anything gets built.',
       points: ['UX Research & Strategy', 'User Flows & Information Architecture', 'Wireframes & Prototypes', 'UI Design for Web & Mobile Apps', 'Dashboards & SaaS Platforms', 'AI Product UX'],
-      image: { src: '/images/shots/fizclo-orders.webp', w: 2000, h: 1469, alt: 'An order management dashboard' },
+      loop: 'product' as const,
     },
     {
       title: 'Creative Direction for Digital Products',
       text: 'One story, look and feel across every team and touchpoint, the way I lead creative at GY6.',
       points: ['Creative Strategy & Concepts', 'Art Direction', 'Campaign & Launch Visuals', 'Design Team Leadership', 'Quality & Consistency Reviews', 'Storytelling & Motion Direction'],
-      image: { src: '/images/projects/storyflow/cover.jpg', w: 1400, h: 888, alt: 'Storyflow, creative direction at GY6' },
+      loop: 'direction' as const,
     },
   ],
 };

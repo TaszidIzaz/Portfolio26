@@ -5,7 +5,7 @@ import type { ThemeId } from './types';
  * `accent` is used for the curtain wipe, `bg` for the browser theme-color.
  */
 export const THEMES: { id: ThemeId; name: string; accent: string; bg: string; quip: string }[] = [
-  { id: 'swiss', name: 'Swiss', accent: '#0E0E0E', bg: '#EEEDE8', quip: 'Black lines, clean grid, a little Bauhaus.' },
+  { id: 'swiss', name: 'Swiss', accent: '#0E0E0E', bg: '#FFFFFF', quip: 'Black lines, clean grid, a little Bauhaus.' },
   { id: 'brutalist', name: 'Brutalist', accent: '#2D5BD8', bg: '#EFE8D8', quip: 'Cut, paste, print. Repeat.' },
   { id: 'folk', name: 'Almanac', accent: '#6F7A35', bg: '#E7E0D0', quip: 'Woodcuts, warm paper, slow seasons.' },
 ];
@@ -44,8 +44,8 @@ export const FOLK_TONES: Tone[] = [
 
 /** Swiss mode: paper and near-black. Sections stack over each other (SwissStack); this drives the top bar + dock. */
 export const SWISS_TONES: Tone[] = [
-  { id: 'paper', bg: '#EEEDE8', fg: '#0E0E0E', accent: '#0E0E0E', onAccent: '#EEEDE8' },
-  { id: 'ink', bg: '#0B0B0B', fg: '#EEEDE8', accent: '#EEEDE8', onAccent: '#0B0B0B' },
+  { id: 'paper', bg: '#FFFFFF', fg: '#0E0E0E', accent: '#0E0E0E', onAccent: '#FFFFFF' },
+  { id: 'ink', bg: '#0B0B0B', fg: '#FFFFFF', accent: '#FFFFFF', onAccent: '#0B0B0B' },
 ];
 
 /** Modes whose sections change colour on scroll. */

@@ -19,14 +19,14 @@ export function About() {
     () => {
       // Words fill in as you read.
       SplitText.create(text.current!, {
-        type: 'words', autoSplit: true, ignore: `.${styles.ico}, .${styles.chip}`,
+        type: 'words', autoSplit: true, ignore: `.${styles.chip}`,
         onSplit: (self) =>
           gsap.fromTo(self.words, { opacity: 0.14 }, {
             opacity: 1, stagger: 0.1, ease: 'none',
             scrollTrigger: { trigger: text.current, start: 'top 80%', end: 'bottom 55%', scrub: true },
           }),
       });
-      gsap.from(`.${styles.ico}, .${styles.chip}`, {
+      gsap.from(`.${styles.chip}`, {
         scale: 0, duration: 0.9, ease: 'back.out(2)', stagger: 0.15,
         scrollTrigger: { trigger: text.current, start: 'top 70%' },
       });
@@ -39,7 +39,7 @@ export function About() {
       <SectionHead index="01" title="About" />
       <div className="grid">
         <p ref={text} className={styles.text} style={col('3/13', '1/-1')}>
-          I’m Taszid <span className={styles.ico} aria-hidden />, a product designer and creative director who works hand in hand with
+          I’m Taszid, a product designer and creative director who works hand in hand with
           AI. As creative director at{' '}
           <a className={styles.chip} href={site.employer.url} target="_blank" rel="noopener" data-cursor={`Visit ${site.employer.name} ↗`}>
             {site.employer.name}
