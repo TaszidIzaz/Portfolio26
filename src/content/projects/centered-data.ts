@@ -9,6 +9,7 @@ export const centeredData: Project = {
   title: 'CenteredData',
   summary: 'A tech-forward identity for a data consultancy. Precise, never cold.',
   tags: ['Brand Identity', 'Logo', 'Visual Design'],
+  type: 'Brand Identity',
   year: 2024,
   metric: { value: 'A→Z', label: 'From logo to guidelines, one cohesive system' },
   images: [

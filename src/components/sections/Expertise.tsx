@@ -15,7 +15,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
  * Services as stacking cards (after storeyarchitecture.co.uk "Our areas of expertise").
  * Cards are sticky; each next card slides up over the previous one, which dims and eases back.
  */
-export function Expertise() {
+export function Expertise({ index = '03' }: { index?: string }) {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -40,7 +40,7 @@ export function Expertise() {
 
   return (
     <section ref={ref} className={styles.expertise} id="services" data-narrate="expertise">
-      <SectionHead index="03" title="Services" note="Four ways I can help" />
+      <SectionHead index={index} title="Services" note="Four ways I can help" />
       <div className={`grid ${styles.head}`}>
         <SplitHeading text={expertise.title} className={styles.title} style={col('1/8', '1/-1')} />
         <p className={`t-m regular ${styles.intro}`} style={col('9/13', '1/-1')}>{expertise.intro}</p>

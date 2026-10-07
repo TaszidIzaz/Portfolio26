@@ -35,7 +35,7 @@ src/
 │  ├─ projects/             One file per project (list + case study) · index.ts sets the order + FEATURED_COUNT for the homepage
 │  ├─ about.ts, approach.ts Inner-page copy (about is sourced from the résumé)
 │  ├─ insights.ts           Facts carousel + articles (block-based body)
-│  ├─ home.ts               Hero (+ scrolling reel), story (sideways design process, section 2), about, stats, ticker, expertise (stacking service cards), toolbox
+│  ├─ home.ts               Hero (+ scrolling reel), story (sideways design process, section 2), about, stats, ticker, expertise (stacking service cards)
 │  ├─ testimonials.ts, faq.ts, navigation.ts
 │  ├─ narration.ts          What the dock says per section
 │  ├─ loader.ts             Intro title, status messages, slideshow images + speed
@@ -50,7 +50,7 @@ src/
 │  ├─ chrome/               Always-on UI: Topbar, Dock, Loader, Cursor, GridOverlay, ToneManager,
 │                           SwissStack (Swiss: section 2 slides over the hero + sticky footer reveal)
 │  ├─ ui/                   Swiss.tsx (Bauhaus shapes, marks, blur words, pixel reveal), Collage.tsx (Brutalist), Folk.tsx (Folk)
-│                           Reusable pieces: PageIntro, ParallaxImage, BigMarquee, GapStatement, Reveal,
+│                           Reusable pieces: PageIntro, ParallaxImage, Reveal,
 │                           Button, SectionHead, SplitHeading, Odometer, TransitionLink…
 │  └─ providers/            SmoothScroll (Lenis), ThemeProvider (modes + curtain wipe),
 │                           PageTransitions (View Transitions API)

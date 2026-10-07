@@ -9,6 +9,7 @@ export const profyl: Project = {
   title: 'Profyl.ai',
   summary: 'Smarter, faster, AI-powered hiring for recruiters and job seekers.',
   tags: ['AI/ML', 'Product Design', 'Full-Stack'],
+  type: 'AI Product',
   year: 2024,
   metric: { value: '−40%', label: 'time-to-hire with AI talent matching' },
   images: [

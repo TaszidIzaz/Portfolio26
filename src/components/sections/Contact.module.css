@@ -15,7 +15,6 @@
 .field { position: relative; height: clamp(320px, 40vw, 620px); }
 .canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; }
 .fieldText { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; align-items: center; pointer-events: none; color: #fff; mix-blend-mode: difference; }
-.hint { position: absolute; left: 0; right: 0; bottom: calc(var(--dock-h) + 16px); text-align: center; pointer-events: none; color: var(--muted); transition: color .3s; }
 @media (max-width: 767px) { .mail { font-size: var(--fs-m); line-height: var(--lh-m); } }
 
 /* Swiss: blurred words behind the title */

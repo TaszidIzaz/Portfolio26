@@ -1,7 +1,0 @@
-.gap { padding-block: clamp(96px, 14vw, 240px); overflow: hidden; }
-.row { display: flex; justify-content: center; align-items: center; gap: clamp(12px, 1.6vw, 28px); padding-inline: var(--margin); }
-.word { font-size: var(--fs-l); line-height: var(--lh-l); font-weight: 500; letter-spacing: var(--ls-head); white-space: nowrap; }
-.img { position: relative; flex: none; width: 4vw; height: calc(var(--fs-l) * 1.15); overflow: hidden; background: var(--soft); }
-.img img { object-fit: cover; }
-.text { max-width: 26em; margin: clamp(40px, 5vw, 80px) auto 0; text-align: center; color: var(--muted); padding-inline: var(--margin); }
-@media (max-width: 767px) { .row { gap: 8px; } }

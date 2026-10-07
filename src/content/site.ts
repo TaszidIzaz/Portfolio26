@@ -2,7 +2,7 @@
 export const site = {
   name: 'Taszid Izaz',
   initials: 'TI',
-  role: 'Creative Director',
+  role: 'Designer',
   roleLong: 'AI-enabled Product Designer & Creative Director',
   city: 'Dhaka',
   country: 'BD',

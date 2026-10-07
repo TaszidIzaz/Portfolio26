@@ -6,8 +6,8 @@ import { Clip, Stamp, Tape } from '@/components/ui/Collage';
 import { Seal, Shard } from '@/components/ui/Folk';
 import { PixelLayers, revealPixels } from '@/components/ui/Swiss';
 import { TransitionLink } from '@/components/ui/TransitionLink';
-import { projectHref } from '@/content/projects';
-import type { Img, Project } from '@/content/types';
+import { previewOf, projectHref } from '@/content/projects';
+import type { Project } from '@/content/types';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { prefersReducedMotion } from '@/lib/motion';
 import styles from './WorkFloat.module.css';
@@ -15,8 +15,8 @@ import styles from './WorkFloat.module.css';
 /**
  * Staggered, floating cards (inspired by art-yakushev.com/work).
  * Pattern of 6, repeating: big · large + small (offset) · medium · large + small (offset).
- * Three parallax layers: the card drifts at its own speed, the image moves inside its frame,
- * and a floating preview moves at a third speed.
+ * Parallax: the card drifts at its own speed and the image moves inside its frame;
+ * the floating preview stays centred on the frame.
  */
 type Slot = { c: string; row: number; ratio: string; speed: number; preview: boolean; offset?: boolean; sizes: string };
 const PATTERN: Slot[] = [
@@ -28,12 +28,6 @@ const PATTERN: Slot[] = [
   { c: '10/13', row: 4, ratio: '1 / 1', speed: 1.8, preview: false, offset: true, sizes: '(max-width: 767px) 100vw, 30vw' },
 ];
 
-/** Prefer a video from the gallery for the floating preview, else the second still. */
-function previewOf(p: Project): Img | undefined {
-  const all = p.gallery.flatMap((r) => r.images);
-  return all.find((i) => i.video) ?? all.find((i) => i.src !== p.cover.src);
-}
-
 export function WorkFloat({ projects }: { projects: Project[] }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -44,7 +38,6 @@ export function WorkFloat({ projects }: { projects: Project[] }) {
       cards.forEach((card) => {
         const frame = card.querySelector<HTMLElement>('[data-frame]')!;
         const media = card.querySelector<HTMLElement>('[data-media]')!;
-        const preview = card.querySelector<HTMLElement>('[data-preview]');
         const range = { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 0.6 };
         revealPixels(frame, card);
 
@@ -57,8 +50,6 @@ export function WorkFloat({ projects }: { projects: Project[] }) {
           const speed = Number(card.dataset.speed);
           // Card floats at its own speed (small cards faster = closer)
           gsap.fromTo(card, { y: 90 * speed }, { y: -90 * speed, ease: 'none', scrollTrigger: range });
-          // Preview floats faster than its card
-          if (preview) gsap.fromTo(preview, { y: 70 }, { y: -70, ease: 'none', scrollTrigger: range });
         });
       });
     },

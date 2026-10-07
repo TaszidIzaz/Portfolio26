@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { Button } from '@/components/ui/Button';
 import { Clock } from '@/components/ui/Clock';
@@ -26,8 +26,6 @@ export function Contact() {
   const ref = useRef<HTMLElement>(null);
   const [copyLine, setCopyLine] = useState(COPY_IDLE);
   const { nextTheme } = useTheme();
-  const [stirring, setStirring] = useState(false);
-  const onHoverChange = useCallback((h: boolean) => setStirring(h), []);
 
   useGSAP(
     () => {
@@ -49,7 +47,7 @@ export function Contact() {
 
   return (
     <footer ref={ref} className={styles.contact} id="contact" data-narrate="contact">
-      <SectionHead index="07" title="Contact" note={site.availability.booking} />
+      <SectionHead index="05" title="Contact" note={site.availability.booking} />
       <Doodle name="scribble" style={{ top: '9%', right: '10vw', '--s': '120px' }} />
       <Doodle name="star" style={{ top: '30%', right: '30vw', '--s': '64px', '--r': '-14deg' }} />
       <Cut name="hen" style={{ top: '8%', right: '8vw', '--s': '140px', '--c': 'var(--ink-2)' }} />
@@ -106,12 +104,10 @@ export function Contact() {
 
       {/* Interactive halftone band — hover (or drag on touch) to stir it */}
       <div className={styles.field} data-cursor="Stir it">
-        <HalftoneField className={styles.canvas} onHoverChange={onHoverChange} />
+        <HalftoneField className={styles.canvas} />
         <div className={`grid ${styles.fieldText}`}>
           <p className="t-l" style={col('1/7', '1/-1')}>{site.name}</p>
-          <p className="t-s right hide-m" style={col('9/13')}>Designed in {site.city}, shipped everywhere.</p>
         </div>
-        <p className={`label ${styles.hint}`} aria-hidden>{stirring ? 'There you go. Keep stirring.' : 'Hover to stir the dots'}</p>
       </div>
     </footer>
   );

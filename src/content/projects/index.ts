@@ -1,8 +1,9 @@
-import type { Project } from '../types';
+import type { Img, Project } from '../types';
 import { algorizin } from './algorizin-opt';
 import { bsic } from './bsic';
 import { centeredData } from './centered-data';
 import { fizclo } from './fizclo-ecommerce';
+import { obsidian } from './obsidian-advisory';
 import { paperless } from './paperless';
 import { profyl } from './profyl-ai';
 import { revora } from './revora';
@@ -14,7 +15,7 @@ import { teez } from './teez-agency';
  * To add a project: create `<slug>.ts` next to this file, then add it here.
  */
 export const projects: Project[] = [
-  bsic, revora, paperless, storyflow, teez,
+  bsic, revora, obsidian, paperless, storyflow, teez,
   algorizin, profyl, fizclo, centeredData,
 ];
 
@@ -25,6 +26,13 @@ export const featuredProjects = projects.slice(0, FEATURED_COUNT);
 export const allWorkHref = '/work';
 export const projectHref = (slug: string) => `/work/${slug}`;
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+/** The visual that floats centred over a project's cover in the work lists. */
+export function previewOf(p: Project): Img | undefined {
+  if (p.preview) return p.preview;
+  const all = p.gallery.flatMap((r) => r.images);
+  return all.find((i) => i.video) ?? all.find((i) => i.src !== p.cover.src);
+}
 
 /** The project after `slug`, wrapping around. */
 export function getNextProject(slug: string): Project {

@@ -33,6 +33,8 @@ export interface Project {
   /** One-liner used in lists */
   summary: string;
   tags: string[];
+  /** Short kind of work for the grid caption, e.g. "Rebrand & Website" (falls back to the first tag) */
+  type?: string;
   year?: number;
   metric?: { value: string; label: string };
   /** Strip shown on list rows */
@@ -47,6 +49,8 @@ export interface Project {
   services: string[];
   live?: { label: string; href: string };
   cover: Img;
+  /** Visual that floats centred over the cover in the work lists (defaults to the first video, else the first other still) */
+  preview?: Img;
   /** Statement under the cover (keep it to one or two sentences) */
   intro: string;
   /** Optional short paragraph; the rest of the story is told with images */

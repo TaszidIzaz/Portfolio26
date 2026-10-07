@@ -24,7 +24,7 @@ export function Faq() {
 
   return (
     <section className="sec" data-narrate="faq">
-      <SectionHead index="06" title="Questions" />
+      <SectionHead index="04" title="Questions" />
       <div className={`grid ${styles.grid}`}>
         <div className={styles.side} style={col('1/6', '1/-1')}>
           <SplitHeading text={faqIntro.title} className={styles.title} />

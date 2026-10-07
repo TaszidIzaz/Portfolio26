@@ -113,7 +113,6 @@ export const story = {
 
 
 export const about = {
-  pillImage: '/images/shots/shot-1.jpg',
   notes: [
     { label: 'How I work', text: 'AI takes on the heavy lifting: synthesis, variations, first drafts. That frees my time for the decisions that matter.' },
     { label: 'What stays human', text: 'Taste, empathy and judgement. AI can suggest a hundred options; it can’t tell you which one your users will trust.' },
@@ -170,9 +169,3 @@ export const expertise = {
     },
   ],
 };
-
-
-export const toolbox = [
-  'Figma', 'AI research synthesis', 'AI-assisted prototyping', 'Jitter', 'After Effects', 'Next.js', 'React', 'Webflow',
-  'usability testing', 'and a lot of human judgement.',
-];

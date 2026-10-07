@@ -53,7 +53,7 @@ export const SECTION_TONES: Partial<Record<ThemeId, Tone[]>> = { swiss: SWISS_TO
 
 
 /** Swiss: which sections turn black (by data-narrate id). Everything else stays paper. */
-export const SWISS_DARK_SECTIONS = ['deck', 'toolbox', 'contact', 'timeline', 'services', 'caseNext'];
+export const SWISS_DARK_SECTIONS = ['deck', 'expertise', 'contact', 'timeline', 'caseNext'];
 
 /** Which tone a section gets. Default: cycle through the mode's tones in page order. */
 export const TONE_PICK: Partial<Record<ThemeId, (narrateId: string, index: number) => number>> = {

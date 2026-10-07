@@ -6,7 +6,6 @@ export const narration = {
   numbers: 'Numbers, minus the hype.',
   work: 'Made faster, finished by hand.',
   expertise: 'Four ways I can help.',
-  toolbox: 'Tools, old and new.',
   testimonials: 'Words from real humans.',
   faq: 'Ask me anything. Yes, even about AI.',
   contact: 'End of the scroll. Start of something?',

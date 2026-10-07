@@ -6,6 +6,7 @@ export const revora: Project = {
   title: 'Revora',
   summary: 'A complete brand and website revamp for an innovative SaaS company.',
   tags: ['Creative Direction', 'Brand Identity', 'Web Design'],
+  type: 'Rebrand & Website',
   images: [
     { kind: 'image', src: '/images/projects/revora/cover.jpg', alt: 'Revora — cover', width: 'a' },
     { kind: 'image', src: '/images/projects/revora/01-poster.jpg', alt: 'Revora — visual 1', width: 'b' },

@@ -3,6 +3,7 @@ import { projects } from '@/content/projects';
 import { site } from '@/content/site';
 import { workIndex } from '@/content/work';
 import { col } from '@/lib/grid';
+import { WorkGrid } from './WorkGrid';
 import { WorkRow } from './WorkRow';
 import styles from './WorkIndex.module.css';
 
@@ -21,7 +22,10 @@ export function WorkIndex() {
           <h2 className="t-l" style={col('1/7', '1/3')}>Work</h2>
           <p className="label muted right" style={col('10/13', '3/5')}>{String(projects.length).padStart(2, '0')} projects</p>
         </div>
-        {projects.map((p, i) => <WorkRow key={p.slug} project={p} index={i} />)}
+        <div data-only="brutalist" className={styles.only}>
+          {projects.map((p, i) => <WorkRow key={p.slug} project={p} index={i} />)}
+        </div>
+        <div data-only="swiss folk" className={styles.only}><WorkGrid projects={projects} /></div>
       </section>
     </>
   );

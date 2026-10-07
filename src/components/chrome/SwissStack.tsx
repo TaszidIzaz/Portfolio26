@@ -10,8 +10,9 @@ import { prefersReducedMotion } from '@/lib/motion';
 /**
  * Swiss mode only:
  *  - Each top-level section in <main> gets its own colour (paper, or black for SWISS_DARK_SECTIONS).
- *  - The second section slides up over the first, which lags at half speed and dims (parallax overlap).
- *    Every other section scrolls normally.
+ *  - Homepage only: the second section slides up over the full-screen hero, which lags at half speed and dims
+ *    (parallax overlap). Inner pages open with a short intro that the next section already overlaps on load,
+ *    so there the effect would start half-applied; every other section scrolls normally.
  *  - The footer sits underneath: the content above lifts away while the footer barely moves (sticky reveal).
  * Positions are measured from layout (offsetTop), so the transforms don't feed back into the triggers.
  */
@@ -48,9 +49,9 @@ export function SwissStack() {
       const top = (el: HTMLElement) => main.offsetTop + el.offsetTop;
       const vh = () => window.innerHeight;
       ctx = gsap.context(() => {
-        // Only the second section slides over the first (on the homepage: the story over the hero).
+        // Only the second section slides over the first, and only on the homepage (the story over the hero).
         const [first, second] = kids;
-        if (first && second && second !== footer) {
+        if (pathname === '/' && first && second && second !== footer) {
           gsap.fromTo(first, { y: 0, '--cover': 0 }, {
             y: () => vh() * 0.5, '--cover': 0.5, ease: 'none',
             scrollTrigger: { start: () => top(second) - vh(), end: () => top(second), scrub: true, invalidateOnRefresh: true },

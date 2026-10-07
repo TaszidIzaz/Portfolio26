@@ -86,11 +86,12 @@ export function Dock() {
     const p = panel.current!;
     if (toggleLabel.current) scramble(toggleLabel.current, open ? 'Close' : 'Menu', 10);
     if (open) {
-      gsap.to(p, { height: 'auto', duration: 0.75, ease: 'expo.out' });
-      gsap.fromTo(p.querySelectorAll('[data-item]'), { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out', stagger: 0.045, delay: 0.08 });
+      // Quick: the panel opens and the rows follow almost at once
+      gsap.to(p, { height: 'auto', duration: 0.45, ease: 'expo.out', overwrite: true });
+      gsap.fromTo(p.querySelectorAll('[data-item]'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out', stagger: 0.02, overwrite: true });
       lenis?.stop();
     } else {
-      gsap.to(p, { height: 0, duration: 0.55, ease: 'expo.inOut' });
+      gsap.to(p, { height: 0, duration: 0.35, ease: 'expo.inOut', overwrite: true });
       lenis?.start();
     }
   }, [open, lenis]);
@@ -122,7 +123,8 @@ export function Dock() {
             <TransitionLink key={item.label} href={item.href} className={styles.row} onNavigate={close}>
               <span className={styles.n} data-item>{String(i + 1).padStart(2, '0')}</span>
               <span className={styles.thumb} data-item>
-                <Image src={item.thumb} alt="" fill sizes="56px" />
+                {/* eager: tiny thumbs load with the page, so they're ready the moment the menu opens */}
+                <Image src={item.thumb} alt="" fill sizes="56px" loading="eager" />
               </span>
               <span className={styles.label} data-item>{item.label}</span>
               <span className={styles.chips} data-item>{item.chips.map((c) => <i key={c}>{c}</i>)}</span>

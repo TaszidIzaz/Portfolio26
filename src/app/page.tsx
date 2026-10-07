@@ -5,9 +5,7 @@ import { Faq } from '@/components/sections/Faq';
 import { Hero } from '@/components/sections/Hero';
 import { Numbers } from '@/components/sections/Numbers';
 import { Expertise } from '@/components/sections/Expertise';
-import { Testimonials } from '@/components/sections/Testimonials';
 import { Ticker } from '@/components/sections/Ticker';
-import { Toolbox } from '@/components/sections/Toolbox';
 import { Works } from '@/components/sections/Works';
 
 /**
@@ -24,8 +22,6 @@ export default function HomePage() {
       <Ticker />
       <Works />
       <Expertise />
-      <Toolbox />
-      <Testimonials />
       <Faq />
       <Contact />
     </>

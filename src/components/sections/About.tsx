@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useRef } from 'react';
 import { SectionHead } from '@/components/ui/SectionHead';
 import { TransitionLink } from '@/components/ui/TransitionLink';
@@ -20,14 +19,14 @@ export function About() {
     () => {
       // Words fill in as you read.
       SplitText.create(text.current!, {
-        type: 'words', autoSplit: true, ignore: `.${styles.pill}, .${styles.ico}, .${styles.chip}`,
+        type: 'words', autoSplit: true, ignore: `.${styles.ico}, .${styles.chip}`,
         onSplit: (self) =>
           gsap.fromTo(self.words, { opacity: 0.14 }, {
             opacity: 1, stagger: 0.1, ease: 'none',
             scrollTrigger: { trigger: text.current, start: 'top 80%', end: 'bottom 55%', scrub: true },
           }),
       });
-      gsap.from(`.${styles.pill}, .${styles.ico}, .${styles.chip}`, {
+      gsap.from(`.${styles.ico}, .${styles.chip}`, {
         scale: 0, duration: 0.9, ease: 'back.out(2)', stagger: 0.15,
         scrollTrigger: { trigger: text.current, start: 'top 70%' },
       });
@@ -45,8 +44,7 @@ export function About() {
           <a className={styles.chip} href={site.employer.url} target="_blank" rel="noopener" data-cursor={`Visit ${site.employer.name} ↗`}>
             {site.employer.name}
           </a>
-          , I use it to get from a rough idea{' '}
-          <span className={styles.pill}><Image src={about.pillImage} alt="" fill sizes="120px" /></span> to a tested product faster, and
+          , I use it to get from a rough idea to a tested product faster, and
           my experience to make sure it still feels human.
         </p>
       </div>

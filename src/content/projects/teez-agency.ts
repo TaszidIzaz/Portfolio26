@@ -6,6 +6,7 @@ export const teez: Project = {
   title: 'Teez Agency',
   summary: 'An editorial, food-first website for a premium F&B content agency.',
   tags: ['Creative Direction', 'Web Design', 'UI/UX'],
+  type: 'Website',
   images: [
     { kind: 'image', src: '/images/projects/teez/cover.jpg', alt: 'Teez Agency — cover', width: 'a' },
     { kind: 'image', src: '/images/projects/teez/02-poster.jpg', alt: 'Teez Agency — visual 1', width: 'b' },
